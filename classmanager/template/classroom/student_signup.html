@@ -1,0 +1,181 @@
+{#{% extends 'classroom/base.html' %}#}
+{#{% load static %}#}
+{#{% block content %}#}
+{##}
+{#<div class="login-page">#}
+{#    <img src="{% static 'images/login-background.PNG' %}" alt="">#}
+{#    <div class="student-signup-form">#}
+{#      {% if registered %}#}
+{#      <h1>Thank you for registering.</h1>#}
+{#      {% else %}#}
+{#      <h1>Sign up as a Student.</h1>#}
+{#      <h3>Fill out the form:</h3>#}
+{##}
+{#      <form method="post">#}
+{#        {% csrf_token %}#}
+{##}
+{#        {{ student_profile_form.non_field_errors }}#}
+{##}
+{#        <p> <label>{{ student_profile_form.name.label_tag }}</label>{{ student_profile_form.name }}</p>#}
+{#        <p> <label >{{ student_profile_form.roll_no.label_tag }}</label>  {{ student_profile_form.roll_no }}</p>#}
+{#        <p> <label for="">{{ student_profile_form.phone.label_tag }}</label> {{ student_profile_form.phone }}</p>#}
+{#        <p> <label for="">{{ student_profile_form.email.label_tag }}</label>{{ student_profile_form.email }}</p>#}
+{##}
+{#        {{ user_form.non_field_errors }}#}
+{##}
+{#        <p> <label for="">{{ user_form.username.label_tag }}</label>{{ user_form.username }}</p>#}
+{#        <p> {{ user_form.username.help_text }}</p>#}
+{#        <p> <label for="">{{ user_form.password1.label_tag }}</label>{{ user_form.password1 }}</p>#}
+{#        <p>Password can't be similar to your other fields and must contain atleast 8 characters.</p>#}
+{#        <p> <label for="">{{ user_form.password2.label_tag }}</label>{{ user_form.password2 }}</p>#}
+{#        <p> {{ user_form.password2.help_text }} </p>#}
+{#        <input type="submit" name="" value="Sign Up">#}
+{#      </form>#}
+{#      <a href="{% url 'classroom:login' %}">Already have an account.</a>#}
+{#      {% endif %}#}
+{#    </div>#}
+{#</div>#}
+{##}
+{#{% endblock %}#}
+
+
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <title>Login V1</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--===============================================================================================-->
+    <link rel="icon" type="image/png" href="{% static 'images/icons/favicon.ico' %}"/>
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{% static 'fonts/font-awesome-4.7.0/css/font-awesome.min.css' %}">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{% static 'vendor/animate/animate.css' %}">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{% static 'vendor/css-hamburgers/hamburgers.min.css' %}">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{% static 'vendor/select2/select2.min.css' %}">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/util.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/mains.css' %}">
+    <!--===============================================================================================-->
+</head>
+<body>
+
+<div class="limiter">
+    <div class="container-login100">
+        <div class="wrap-login100">
+            <div class="login100-pic js-tilt" data-tilt>
+                <img src="{% static 'images/img-01.png' %}" alt="IMG">
+            </div>
+                               {% if registered %}
+                                    <h1>Thank you for registering.</h1>
+                                     {% else %}
+            <form class="login100-form validate-form" method="post">
+                   <span class="login100-form-title">
+						Sign Up
+                   </span>
+                {% csrf_token %}
+
+                {{ student_profile_form.non_field_errors }}
+
+                <div class="wrap-input100 validate-input" data-validate="Valid email is required: ex@abc.xyz">
+                    <p><label>{{ student_profile_form.name.label_tag }}</label>{{ student_profile_form.name }}</p>
+                    <span class="focus-input100"></span>
+                    <span class="symbol-input100">
+						</span>
+                </div>
+
+                <div class="wrap-input100 validate-input" data-validate="Valid email is required: ex@abc.xyz">
+                    <p><label>{{ student_profile_form.roll_no.label_tag }}</label> {{ student_profile_form.roll_no }}
+                    </p>
+                    <span class="focus-input100"></span>
+                    <span class="symbol-input100">
+						</span>
+                </div>
+
+                <div class="wrap-input100 validate-input" data-validate="Valid email is required: ex@abc.xyz">
+                    <p><label for="">{{ student_profile_form.phone.label_tag }}</label> {{ student_profile_form.phone }}
+                    </p>
+                    <span class="focus-input100"></span>
+                    <span class="symbol-input100">
+						</span>
+                </div>
+
+                <div class="wrap-input100 validate-input" data-validate="Valid email is required: ex@abc.xyz">
+                    <p><label for="">{{ student_profile_form.email.label_tag }}</label>{{ student_profile_form.email }}
+                    </p>
+                    <span class="focus-input100"></span>
+                    <span class="symbol-input100">
+						</span>
+                </div>
+
+                {{ user_form.non_field_errors }}
+
+
+                <div class="wrap-input100 validate-input" data-validate="Password is required">
+                    <p><label for="">{{ user_form.username.label_tag }}</label>{{ user_form.username }}</p>
+                    <span class="focus-input100"></span>
+                    <span class="symbol-input100">
+						</span>
+                                                    <p> {{ user_form.username.help_text }}</p>
+                </div>
+
+                <div class="wrap-input100 validate-input" data-validate="Password is required">
+                    <p><label for="">{{ user_form.password1.label_tag }}</label>{{ user_form.password1 }}</p>
+                    <span class="focus-input100"></span>
+                    <span class="symbol-input100">
+						</span>
+                                                    <p>Password can't be similar to your other fields and must contain atleast 8 characters.</p>
+                </div>
+
+                <div class="wrap-input100 validate-input" data-validate="Password is required">
+                    <p><label for="">{{ user_form.password2.label_tag }}</label>{{ user_form.password2 }}</p>
+                    <span class="focus-input100"></span>
+                    <span class="symbol-input100">
+						</span>
+                                                    <p> {{ user_form.password2.help_text }} </p>
+                </div>
+
+                <div class="container-login100-form-btn">
+                    <button class="login100-form-btn" name="" value="Sign Up" type="submit">
+                        Sign Up
+                    </button>
+
+                </div>
+
+                <div class="text-center p-t-136">
+                    <a class="txt2" href="{% url 'classroom:login' %}">
+                        Create your Account
+                        <i class="fa fa-long-arrow-right m-l-5" aria-hidden="true"></i>
+                    </a>
+                </div>
+            </form>
+                            {% endif %}
+        </div>
+    </div>
+</div>
+
+
+<!--===============================================================================================-->
+<script src="{% static 'vendor/jquery/jquery-3.2.1.min.js' %}"></script>
+<!--===============================================================================================-->
+<script src="{% static 'vendor/bootstrap/js/popper.js' %}"></script>
+<script src="{% static 'vendor/bootstrap/js/bootstrap.min.js' %}"></script>
+<!--===============================================================================================-->
+<script src="{% static 'vendor/select2/select2.min.js' %}"></script>
+<!--===============================================================================================-->
+<script src="{% static 'vendor/tilt/tilt.jquery.min.js' %}"></script>
+<script>
+    $('.js-tilt').tilt({
+        scale: 1.1
+    })
+</script>
+<!--===============================================================================================-->
+<script src="{% static 'js/mains.js' %}"></script>
+
+</body>
+</html>
