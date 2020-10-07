@@ -73,6 +73,7 @@
             </div>
                                {% if registered %}
                                     <h1>Thank you for registering.</h1>
+                                   <a href="{% url 'classroom:login' %}"> Log In Here </a>
                                      {% else %}
             <form class="login100-form validate-form" method="post">
                    <span class="login100-form-title">

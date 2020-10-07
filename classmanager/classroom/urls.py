@@ -37,8 +37,9 @@ urlpatterns =[
     path('submit_list/',views.submit_list,name="submit_list"),
     path('change_password/',views.change_password,name="change_password"),
     # Static Pages
-    path('about/', views.aboutview),
-    path('contact/', views.aboutview),
+    path('about/', views.aboutview, name='about'),
+    path('contact/', views.aboutview, name='contact'),
+    path('course/', views.courseview, name='course')
 
 
 ]

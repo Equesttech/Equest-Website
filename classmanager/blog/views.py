@@ -5,14 +5,17 @@ from hitcount.views import HitCountDetailView
 from django.views import generic
 from .models import Post
 
+
 def category_list(request):
 
     categories = Category.objects.all()
     return render(request, 'classroom/blog-home.html', {'categories': categories})
 
+
 def category_detail(request, pk):
     category = get_object_or_404(Category, pk=pk)
     return render(request, 'classroom/blog-home.html.html', {'category': category})
+
 
 class PostList(generic.ListView):
     queryset = Post.objects.filter(status=1).order_by('-created_on')

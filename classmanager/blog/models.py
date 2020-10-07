@@ -29,6 +29,7 @@ class Category(models.Model):
 
 class Post(models.Model):
     category = models.ForeignKey(Category, verbose_name="Category", on_delete=models.CASCADE)
+    cover = models.ImageField(upload_to='blog_1images/', blank=True, default='blog_1images/defaultblog.jpg')
     title = models.CharField(max_length=200, unique=True, verbose_name="Title")
     slug = models.SlugField(max_length=200, unique=True)
     author = models.ForeignKey(Teacher, on_delete=models.CASCADE, related_name='Post')

@@ -1,8 +1,9 @@
+{#{% extends 'classroom/base.html' %}#}
 {% load hitcount_tags %}
 {% load static %}
 {% block content %}
 {% load crispy_forms_tags %}
-
+{##}
 <!DOCTYPE html>
 <html lang="zxx" class="no-js">
 
@@ -132,7 +133,7 @@
 					<div class="single-post row">
 						<div class="col-lg-12">
 							<div class="feature-img">
-								<img class="img-fluid" src="img/blog/feature-img1.jpg" alt="">
+								<img class="img-fluid" src="{{ post.cover.url }}" alt="">
 							</div>
 						</div>
 						<div class="col-lg-3  col-md-3 meta-details">
@@ -160,57 +161,18 @@
 							<p class="excert">
                                 {{ post.content | safe }}
 							</p>
-
-
-						</div>
-						<div class="col-lg-12">
-
-							<div class="row mt-30 mb-30">
-
-								<div class="col-lg-12 mt-30">
-
-
-								</div>
-							</div>
 						</div>
 					</div>
-					<div class="navigation-area">
-						<div class="row">
-							<div class="col-lg-6 col-md-6 col-12 nav-left flex-row d-flex justify-content-start align-items-center">
-								<div class="thumb">
-									<a href="#"><img class="img-fluid" src="img/blog/prev.jpg" alt=""></a>
-								</div>
-								<div class="arrow">
-									<a href="#"><span class="lnr text-white lnr-arrow-left"></span></a>
-								</div>
-								<div class="detials">
-									<p>Prev Post</p>
-									<a href="#"><h4>Space The Final Frontier</h4></a>
-								</div>
-							</div>
-							<div class="col-lg-6 col-md-6 col-12 nav-right flex-row d-flex justify-content-end align-items-center">
-								<div class="detials">
-									<p>Next Post</p>
-									<a href="#"><h4>Telescopes 101</h4></a>
-								</div>
-								<div class="arrow">
-									<a href="#"><span class="lnr text-white lnr-arrow-right"></span></a>
-								</div>
-								<div class="thumb">
-									<a href="#"><img class="img-fluid" src="img/blog/next.jpg" alt=""></a>
-								</div>
-							</div>
-						</div>
-					</div>
+
 					<div class="comments-area">
-                        <h4>{{ comments.count }} comments</h4>
+						<h4>{{ comments.count }} Comments</h4>
 						<div class="comment-list">
 							<div class="single-comment justify-content-between d-flex">
 								<div class="user justify-content-between d-flex">
 									<div class="thumb">
 										<img src="img/blog/c1.jpg" alt="">
 									</div>
-                                    {% for comment in comments %}
+									{% for comment in comments %}
 									<div class="desc">
 										<h5><a href="#">{{ comment.name }}</a></h5>
 										<p class="date">{{ comment.created_on }}</p>
@@ -218,57 +180,35 @@
 											{{ comment.body | linebreaks }}
 										</p>
 									</div>
+                                    {% endfor %}
 								</div>
-								<div class="reply-btn">
-									<a href="" class="btn-reply text-uppercase">reply</a>
-								</div>
+
 							</div>
 						</div>
-						<div class="comment-list left-padding">
-							<div class="single-comment justify-content-between d-flex">
-								<div class="user justify-content-between d-flex">
-{#									<div class="thumb">#}
-{#										<img src="img/blog/c2.jpg" alt="">#}
 
-{#                                        This is the section for the replies#}
-{#									</div>#}
-{#                                        {% for reply in comment.replies.all %}#}
-{#									<div class="desc">#}
-{#										<h5><a href="#">{{ reply.name }}</a></h5>#}
-{#										<p class="date">{{ reply.created_on }}</p>#}
-{#										<p class="comment">#}
-{#											{{ reply.body }}#}
-{#										</p>#}
-{#                                        {% endfor %}#}
-{#                                {% empty %}#}
-{#                                <h4>There are no comments yet</h4>#}
-									</div>
-								</div>
-                            {% endfor %}
-{#								<div class="reply-btn">#}
-{#									<a href="" class="btn-reply text-uppercase">reply</a>#}
-{#								</div>#}
-{#							</div>#}
-						</div>
-
-						
 					</div>
-					<div class="comment-form">
+{#                In the Future this might be used to post comments#}
+{#					<div class="comment-form">#}
 {#						<h4>Leave a Comment</h4>#}
-{#						<form action="." method="post">#}
+{#						<form>#}
 {#							<div class="form-group form-inline">#}
 {#								<div class="form-group col-lg-6 col-md-12 name">#}
-{#                                    {{ comment_form | crispy }}#}
-{#                                    {% csrf_token %}#}
-{#                                    <input type="hidden" name="parent_id" value="{{ comment.id }}">#}
-{##}
+{#									<input type="text" class="form-control" id="name" placeholder="Enter Name" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter Name'">#}
 {#								</div>#}
-{##}
+{#								<div class="form-group col-lg-6 col-md-12 email">#}
+{#									<input type="email" class="form-control" id="email" placeholder="Enter email address" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter email address'">#}
+{#								</div>#}
 {#							</div>#}
-{##}
-{#							<button type="submit" class="btn" value="Reply">Post Comment</button>#}
+{#							<div class="form-group">#}
+{#								<input type="text" class="form-control" id="subject" placeholder="Subject" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Subject'">#}
+{#							</div>#}
+{#							<div class="form-group">#}
+{#								<textarea class="form-control mb-10" rows="5" name="message" placeholder="Messege" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Messege'"#}
+{#								 required=""></textarea>#}
+{#							</div>#}
+{#							<a href="#" class="btn">Post Comment</a>#}
 {#						</form>#}
-					</div>
+{#					</div>#}
 				</div>
 				<div class="col-lg-4 sidebar-widgets">
 					<div class="widget-wrap">
@@ -340,7 +280,8 @@
 							<a href="#"><img class="img-fluid" src="img/blog/ads-banner.jpg" alt=""></a>
 						</div>
 						<div class="single-sidebar-widget post-category-widget">
-							<h4 class="category-title">Post Catgories</h4>
+                            for category in
+							<h4 class="category-title">Post Categories</h4>
 							<ul class="cat-list">
 								<li>
 									<a href="#" class="d-flex justify-content-between">

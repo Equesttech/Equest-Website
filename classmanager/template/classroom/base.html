@@ -132,27 +132,23 @@
 
         <div class="collapse navbar-collapse justify-content-end align-items-center" id="navbarSupportedContent">
           <ul class="navbar-nav">
-            <li><a href="index.html">Home</a></li>
-            <li><a href="about.html">About</a></li>
-            <li><a href="courses.html">Courses</a></li>
+            <li><a href="{% url 'home' %}">Home</a></li>
+            <li><a href="{%  url 'classroom:contact' %}">About</a></li>
+            <li><a href="{% url 'classroom:course' %}">Courses</a></li>
             <!-- Dropdown -->
             <li class="dropdown">
-              <a class="dropdown-toggle" href="#" data-toggle="dropdown">
-                Pages
-              </a>
-              <div class="dropdown-menu">
-                <a class="dropdown-item" href="elements.html">Elements</a>
-                <a class="dropdown-item" href="course-details.html">Course Details</a>
-              </div>
+{#              <a class="dropdown-toggle" href="#" data-toggle="dropdown">#}
+{#                Pages#}
+{#              </a>#}
+{#              <div class="dropdown-menu">#}
+{#                <a class="dropdown-item" href="{% url 'classroom:' %}">Elements</a>#}
+{#                <a class="dropdown-item" href="course-details.html">Course Details</a>#}
+{#              </div>#}
             </li>
             <li class="dropdown">
-              <a class="dropdown-toggle" href="#" data-toggle="dropdown">
+              <a class="dropdown-toggle" href="{% url 'blog:blog' %}" data-toggle="dropdown">
                 Blog
               </a>
-              <div class="dropdown-menu">
-                <a class="dropdown-item" href="blog-home.html">Blog Home</a>
-                <a class="dropdown-item" href="blog-single.html">Blog Details</a>
-              </div>
             </li>
 {#              This is where I placed the dropdown of Login#}
             <li class="dropdown">
@@ -224,15 +220,15 @@
 					<p class="mx-auto text-white  mt-20 mb-40">
 						In the history of modern astronomy, there is probably no one greater leap forward than the building.
 					</p>
-					<div class="link-nav">
-						<span class="box">
-							<a href="index.html">Home </a>
-							<i class="lnr lnr-arrow-right"></i>
-							<a href="blog-home.html">Blog Home</a>
-							<i class="lnr lnr-arrow-right"></i>
-							<a href="blog-single.html">Single Blog</a>
-						</span>
-					</div>
+{#					<div class="link-nav">#}
+{#						<span class="box">#}
+{#							<a href="index.html">Home </a>#}
+{#							<i class="lnr lnr-arrow-right"></i>#}
+{#							<a href="blog-home.html">Blog Home</a>#}
+{#							<i class="lnr lnr-arrow-right"></i>#}
+{#							<a href="blog-single.html">Single Blog</a>#}
+{#						</span>#}
+{#					</div>#}
 				</div>
 			</div>
 		</div>

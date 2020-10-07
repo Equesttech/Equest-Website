@@ -27,6 +27,9 @@ def homeview(request):
 def contactsview(request):
   return render(request,"eclipse/contacts.html")
 
+def courseview(request):
+  return render(request,"eclipse/contacts.html")
+
 # For Teacher Sign Up
 def TeacherSignUp(request):
     user_type = 'teacher'

@@ -1,0 +1,110 @@
+nav .navbar-brand
+{
+    /* size for brand */
+    font-size: xx-large;
+}
+
+main .form-control
+{
+    /* center form controls */
+    display: inline-block;
+
+    /* override Bootstrap's 100% width for form controls */
+    width: auto;
+}
+
+main
+{
+    /* scroll horizontally as needed */
+    overflow-x: auto;
+
+    /* center contents */
+    text-align: center;
+    list-style-position: inside;
+}
+
+
+footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+ }
+
+
+/* https://stackoverflow.com/questions/25878450/bootstrap-collapsed-navbar-buggy-open */
+/* https://stackoverflow.com/questions/18192082/bootstrap-3-navbar-collapse */
+.navbar-collapse.collapse.in {
+display: inline-block;
+}
+
+/* https://www.freecodecamp.org/news/how-to-center-things-with-style-in-css-dc87b7542689/ */
+/* https://stackoverflow.com/questions/5196583/target-elements-with-multiple-classes-within-one-rule */
+.card.border-secondary.mb-3 {
+    width: 80%;
+    display: inline-block;
+}
+
+.fa-arrow-alt-circle-up {
+    /* Upvote */
+    color: limegreen;
+    padding-bottom: 10px;
+    padding-top: 15px;
+    /* text-align: left;
+    float: right; */
+}
+
+.fa-arrow-alt-circle-down {
+    /* Downvote */
+    color: tomato;
+    /* text-align: left;
+    float: right; */
+}
+
+.icon-label {
+    /* Position text on left of icon */
+    text-align: center;
+    display: inline-block;
+    padding-top: 35px;
+    /* float: middle; */
+    /* vertical-align: middle; */
+}
+
+.card.border-secondary.mb-3  {
+    /* Overide bootstrap defaults so card fills up more space */
+    width: 100%;
+    height: 100%;
+}
+
+.card-text {
+    /* Left-align text within card */
+    text-align: left;
+}
+
+.card-subtitle {
+    /* Float h6 with additional info to bottom */
+    text-align: left;
+    position: absolute;
+    bottom: 0;
+}
+
+.answer-list {
+    /* Some separation between each answer item */
+    padding-bottom: 10px;
+}
+
+/* https://www.w3schools.com/howto/howto_css_image_responsive.asp */
+.img-responsive {
+    text-align: center; 
+    width: 100%;
+    height: auto;
+    max-width: 400px;     /* NEED for proper size */ 
+    max-height: 400px;
+    display: block;
+    margin: auto;         /* NEED for positioning */
+}
+
+.fa-bookmark {
+    float: right;
+}
