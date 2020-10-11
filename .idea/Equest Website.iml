@@ -13,7 +13,7 @@
     </facet>
     <facet type="google-appengine-python" name="Google App Engine (Python)">
       <configuration>
-        <option name="rootFolder" value="" />
+        <option name="rootFolder" value="C:\Users\ADAMU\PycharmProjects\Equest Website\classmanager" />
         <option name="sdkFolder" value="C:\Users\ADAMU\AppData\Local\Google\Cloud SDK\google-cloud-sdk\bin\sdk" />
       </configuration>
     </facet>

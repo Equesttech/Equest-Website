@@ -95,43 +95,95 @@ WSGI_APPLICATION = 'classmanager.wsgi.application'
 
 
 # This is the Database before i Used Cloud SQL
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'classmanager/../db.sqlite3'),
-    }
-}
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': os.path.join(BASE_DIR, 'classmanager/../db.sqlite3'),
+#     }
+# }
+# Database
+# https://docs.djangoproject.com/en/1.8/ref/settings/#databases
+
+# Check to see if MySQLdb is available; if not, have pymysql masquerade as
+# MySQLdb. This is a convenience feature for developers who cannot install
+# MySQLdb locally; when running in production on Google App Engine Standard
+# Environment, MySQLdb will be used.
+try:
+    import MySQLdb  # noqa: F401
+except ImportError:
+    import pymysql
+    pymysql.install_as_MySQLdb()
 
 # # [START db_setup]
-# if os.getenv('GAE_APPLICATION', None):
+# if os.getenv('SERVER_SOFTWARE', '').startswith('Google App Engine'):
 #     # Running on production App Engine, so connect to Google Cloud SQL using
 #     # the unix socket at /cloudsql/<your-cloudsql-connection string>
 #     DATABASES = {
 #         'default': {
 #             'ENGINE': 'django.db.backends.mysql',
-#             'HOST': '/cloudsql/equest-website:us-central1:equest',
-#             'USER': 'equest',
+#             'HOST': '/cloudsql/equest-292122:us-central1:e-quest',
+#             'NAME': 'e-quest',
+#             'USER': 'equestadmin',
 #             'PASSWORD': 'bGlo1G12yO9zj5zz',
-#             'NAME': 'equest',
 #         }
 #     }
 # else:
-#     # Running locally so connect to either a local MySQL instance or connect
-#     # to Cloud SQL via the proxy.  To start the proxy via command line:
-#     #    $ cloud_sql_proxy -instances=[INSTANCE_CONNECTION_NAME]=tcp:3306
+#     # Running locally so connect to either a local MySQL instance or connect to
+#     # Cloud SQL via the proxy. To start the proxy via command line:
+#     #
+#     #     $ cloud_sql_proxy -instances=[INSTANCE_CONNECTION_NAME]=tcp:3306
+#     #
 #     # See https://cloud.google.com/sql/docs/mysql-connect-proxy
 #     DATABASES = {
 #         'default': {
 #             'ENGINE': 'django.db.backends.mysql',
 #             'HOST': '127.0.0.1',
 #             'PORT': '3306',
-#             'NAME': 'equest',
-#             'USER': 'equest',
+#             'NAME': 'e-quest.sql',
+#             'USER': 'equestadmin',
 #             'PASSWORD': 'bGlo1G12yO9zj5zz',
 #         }
 #     }
 # # [END db_setup]
+#
+# # Use a in-memory sqlite3 database when testing in CI systems
+# if os.getenv('TRAMPOLINE_CI', None):
+#     DATABASES = {
+#         'default': {
+#             'ENGINE': 'django.db.backends.sqlite3',
+#             'NAME': os.path.join(BASE_DIR, 'db.sqlite3')
+#         }
+#     }
 
+# [START db_setup]
+if os.getenv('GAE_APPLICATION', None):
+    # Running on production App Engine, so connect to Google Cloud SQL using
+    # the unix socket at /cloudsql/<your-cloudsql-connection string>
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.mysql',
+            'HOST': '/cloudsql/equest-292122:us-central1:e-quest',
+            'USER': 'equestadmin',
+            'PASSWORD': 'bGlo1G12yO9zj5zz',
+            'NAME': 'e-quest',
+        }
+    }
+else:
+    # Running locally so connect to either a local MySQL instance or connect
+    # to Cloud SQL via the proxy.  To start the proxy via command line:
+    #    $ cloud_sql_proxy -instances=[INSTANCE_CONNECTION_NAME]=tcp:3306
+    # See https://cloud.google.com/sql/docs/mysql-connect-proxy
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.mysql',
+            'HOST': '127.0.0.1',
+            'PORT': '3306',
+            'NAME': 'e-quest',
+            'USER': 'equestadmin',
+            'PASSWORD': 'bGlo1G12yO9zj5zz',
+        }
+    }
+# [END db_setup]
 
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
