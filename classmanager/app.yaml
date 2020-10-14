@@ -1,4 +1,6 @@
-runtime: python38
+runtime: python37
+
+entrypoint: gunicorn -b :$PORT classmanager.classmanager.wsgi
 
 handlers:
 # This configures Google App Engine to serve the files in the app's static
