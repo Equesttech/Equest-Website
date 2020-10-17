@@ -20,7 +20,7 @@ ENV PORT 8080
 # promptly appear in Cloud Logging.
 ENV PYTHONUNBUFFERED TRUE
 
-# Run the web service on container startup. Here we use the gunicorn
+# Run the web service on container startup. Here we use the gunicorn to healp us
 # webserver, with one worker process and 8 threads.
 # For environments with multiple CPU cores, increase the number of workers
 # to be equal to the cores available.
