@@ -14,6 +14,9 @@ RUN apk update \
 
 # install dependencies
 RUN pip install --upgrade pip
+RUN pip install build-essential
+RUN pip install python-dev
+RUN pip install libffi-dev
 COPY ./requirements.txt .
 RUN pip install -r requirements.txt
 
