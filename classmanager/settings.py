@@ -30,7 +30,8 @@ SECRET_KEY = '13x8r2se41dawv$7!a-p_h4ni$^i^+r@le7wuadd6gmzb=$ss*'
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    'webapp-tywedacr3a-uc.a.run.app'
+    'webapp-tywedacr3a-uc.a.run.app',
+    '127.0.0.1'
 ]
 
 AUTH_USER_MODEL = 'classroom.User'
