@@ -18,3 +18,4 @@ django-qa==0.10.0
 django-summernote==0.8.11.6
 django-taggit==0.22.2
 misaka==2.1.1
+Pillow==7.1.2
