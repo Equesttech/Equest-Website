@@ -34,7 +34,7 @@ class Post(models.Model):
     author_bio = models.TextField(max_length=200, unique=True)
     title = models.CharField(max_length=200, unique=True, verbose_name="Title")
     slug = models.SlugField(max_length=200, unique=True)
-    author = models.ForeignKey(Teacher, on_delete=models.CASCADE, unique=True)
+    author = models.ForeignKey(Teacher, on_delete=models.CASCADE, related_name='Post')
     updated_on = models.DateTimeField(auto_now=True)
     content = models.TextField()
     created_on = models.DateTimeField(auto_now_add=True)
