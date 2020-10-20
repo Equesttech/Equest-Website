@@ -25,9 +25,6 @@ COPY . .
 # This default value facilitates local development.
 ENV PORT 8080
 
-# Setting this ensures print statements and log messages
-# promptly appear in Cloud Logging.
-ENV PYTHONUNBUFFERED TRUE
 
 # Run the web service on container startup. Here we use the gunicorn to healp us
 # webserver, with one worker process and 8 threads.
