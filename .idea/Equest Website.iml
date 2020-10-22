@@ -4,8 +4,8 @@
     <facet type="django" name="Django">
       <configuration>
         <option name="rootFolder" value="$MODULE_DIR$" />
-        <option name="settingsModule" value="classmanager/classmanager/settings.py" />
-        <option name="manageScript" value="classmanager/manage.py" />
+        <option name="settingsModule" value="classmanager/settings.py" />
+        <option name="manageScript" value="manage.py" />
         <option name="environment" value="&lt;map/&gt;" />
         <option name="doNotUseTestRunner" value="false" />
         <option name="trackFilePattern" value="" />
@@ -13,7 +13,7 @@
     </facet>
     <facet type="google-appengine-python" name="Google App Engine (Python)">
       <configuration>
-        <option name="rootFolder" value="C:\Users\ADAMU\PycharmProjects\Equest Website" />
+        <option name="rootFolder" value="C:\Users\ADAMU\PycharmProjects\Equest-Website" />
         <option name="sdkFolder" value="C:\Users\ADAMU\AppData\Local\Google\Cloud SDK\google-cloud-sdk\bin\sdk" />
       </configuration>
     </facet>

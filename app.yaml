@@ -1,6 +1,6 @@
 
 # [START runtime]
-runtime: python
+runtime: python3
 env: flex
 entrypoint: gunicorn -b :$PORT classmanager.wsgi
 

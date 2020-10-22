@@ -90,32 +90,62 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'classmanager.wsgi.application'
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'mydatabase',
-        'USER': 'djuser',
-        'PASSWORD': 'tu83DJ5hFLhMpHC40INlYsw6Ninjjq',
-        'PORT': '5000',
-    }
-}
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'mydatabase',
+#         'USER': 'djuser',
+#         'PASSWORD': 'tu83DJ5hFLhMpHC40INlYsw6Ninjjq',
+#         'PORT': '5432',
+#     }
+# }
+#
+# DATABASES['default']['HOST'] = '/cloudsql/equest-292122:us-central1:myinstance'
+# if os.getenv('GAE_INSTANCE'):
+#     pass
+# else:
+#     DATABASES['default']['HOST'] = '127.0.0.1'
+# # [END dbconfig]
+#
+# # Use a in-memory sqlite3 database when testing in CI systems
+# if os.getenv('TRAMPOLINE_CI', None):
+#     DATABASES = {
+#         'default': {
+#             'ENGINE': 'django.db.backends.sqlite3',
+#             'NAME': os.path.join(BASE_DIR, 'db.sqlite3')
+#         }
+#     }
+#
 
-DATABASES['default']['HOST'] = '/cloudsql/equest-292122:us-central1:myinstance'
-if os.getenv('GAE_INSTANCE'):
-    pass
-else:
-    DATABASES['default']['HOST'] = '127.0.0.1'
-# [END dbconfig]
-
-# Use a in-memory sqlite3 database when testing in CI systems
-if os.getenv('TRAMPOLINE_CI', None):
+# [START db_setup]
+if os.getenv('GAE_APPLICATION', None):
+    # Running on production App Engine, so connect to Google Cloud SQL using
+    # the unix socket at /cloudsql/<your-cloudsql-connection string>
     DATABASES = {
         'default': {
-            'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': os.path.join(BASE_DIR, 'db.sqlite3')
+            'ENGINE': 'django.db.backends.postgresql',
+            'HOST': 'cloudsql/equest-292122:us-central1:myinstance',
+            'USER': 'djuser',
+            'PASSWORD': 'tu83DJ5hFLhMpHC40INlYsw6Ninjjq',
+            'NAME': 'mydatabase',
         }
     }
-
+else:
+    # Running locally so connect to either a local MySQL instance or connect
+    # to Cloud SQL via the proxy.  To start the proxy via command line:
+    #    $ cloud_sql_proxy -instances=[INSTANCE_CONNECTION_NAME]=tcp:3306
+    # See https://cloud.google.com/sql/docs/mysql-connect-proxy
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'HOST': '127.0.0.1',
+            'PORT': '5432',
+            'NAME': 'mydatabase',
+            'USER': 'postgres',
+            'PASSWORD': 'Highlyicui4cu',
+        }
+    }
+# [END db_setup]
 
 AUTH_PASSWORD_VALIDATORS = [
     {
