@@ -19,16 +19,16 @@ from django.db.models import Q
 
 # For The Static Pages
 def aboutview(request):
-  return render(request,"eclipse/home.html")
+  return render(request,"classroom/about.html")
 
 def homeview(request):
-  return render(request,"eclipse/about.html")
+  return render(request,"classroom/index.html")
 
 def contactsview(request):
-  return render(request,"eclipse/contacts.html")
+  return render(request,"classroom/contacts.html")
 
 def courseview(request):
-  return render(request,"eclipse/contacts.html")
+  return render(request,"classroom/courses.html")
 
 # For Teacher Sign Up
 def TeacherSignUp(request):
@@ -90,7 +90,9 @@ def StudentSignUp(request):
 
 ## Sign Up page which will ask whether you are teacher or student.
 def SignUp(request):
-    return render(request,'classroom/student_signup.html',{})
+    # return render(request,'classroom/student_signup.html',{})
+    return render(request,'classroom/signup.html',{})
+
 
 ## login view.
 def user_login(request):
@@ -112,8 +114,8 @@ def user_login(request):
             messages.error(request, "Invalid Details")
             return redirect('classroom:login')
     else:
-        # return render(request,'classroom/login.html',{})
-        return render(request,'classroom/profile.html',{})
+        return render(request,'classroom/login.html',{})
+        # return render(request,'classroom/profile.html',{})
 
 ## logout view.
 @login_required
