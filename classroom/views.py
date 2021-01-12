@@ -104,7 +104,7 @@ def user_login(request):
 
         if user:
             if user.is_active:
-                login(request, user)
+                login(request,user)
                 return HttpResponseRedirect(reverse('home'))
 
             else:
