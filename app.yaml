@@ -1,11 +1,11 @@
 
 # [START runtime]
 runtime: python3
-env: flex
+#env: flex
 entrypoint: gunicorn -b :$PORT classmanager.wsgi
 
-beta_settings:
-    cloud_sql_instances: equest-292122:us-central1:myinstance
+#beta_settings:
+#    cloud_sql_instances: equest-292122:us-central1:myinstance
 
 runtime_config:
   python_version: 3

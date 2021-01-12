@@ -5,5 +5,5 @@ from classmanager.classmanager.wsgi import application
 # application from mysite/wsgi.py and renames it app so it is
 # discoverable by App Engine without additional configuration.
 # Alternatively, you can add a custom entrypoint field in your app.yaml:
-# entrypoint: gunicorn -b :$PORT classmanager.wsgi
+entrypoint: gunicorn -b; PORT: classmanager.wsgi
 app = application
