@@ -11,12 +11,14 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
 import os
-
+from django.core.management.utils import get_random_secret_key
+from pathlib import Path
+from urllib.parse import urlparse
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 print(BASE_DIR)
 TEMPLATE_DIR = os.path.join(BASE_DIR, "template/")
-# STATIC_DIR = os.path.join(BASE_DIR, 'static/')
+STATIC_DIR = os.path.join(BASE_DIR, 'static/')
 MEDIA_DIR = os.path.join(BASE_DIR, 'media/')
 
 
@@ -24,13 +26,13 @@ MEDIA_DIR = os.path.join(BASE_DIR, 'media/')
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '13x8r2se41dawv$7!a-p_h4ni$^i^+r@le7wuadd6gmzb=$ss*'
+SECRET_KEY = os.getenv("DJANGO_SECRET_KEY", get_random_secret_key())
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.getenv("DEBUG", "FALSE") == 'True'
 
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = os.getenv('DJANGO_ALLOWED_HOSTS', '127.0.0.1,localhost').split(",")
 
 AUTH_USER_MODEL = 'classroom.User'
 
@@ -90,6 +92,28 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'classmanager.wsgi.application'
 
+if os.getenv("DATABASE_URL", "") != "":
+    r = urlparse(os.environ.get("DATABASE_URL"))
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            'NAME': os.path.relpath(r.path, "/"),
+            'USER': r.username,
+            'HOST': r.hostname,
+            'PASSWORD': r.password,
+            'PORT': r.port,
+            'OPTIONS': {'sslmode': 'require'},
+        }
+    }
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+
+    }
+    }
+
 # DATABASES = {
 #     'default': {
 #         'ENGINE': 'django.db.backends.postgresql',
@@ -99,7 +123,7 @@ WSGI_APPLICATION = 'classmanager.wsgi.application'
 #         'PORT': '5432',
 #     }
 # }
-#
+
 # DATABASES['default']['HOST'] = '/cloudsql/equest-292122:us-central1:myinstance'
 # if os.getenv('GAE_INSTANCE'):
 #     pass
@@ -118,33 +142,33 @@ WSGI_APPLICATION = 'classmanager.wsgi.application'
 #
 
 # [START db_setup]
-if os.getenv('GAE_APPLICATION', None):
-    # Running on production App Engine, so connect to Google Cloud SQL using
-    # the unix socket at /cloudsql/<your-cloudsql-connection string>
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.postgresql',
-            'HOST': 'cloudsql/equest-292122:us-central1:myinstance',
-            'USER': 'djuser',
-            'PASSWORD': 'tu83DJ5hFLhMpHC40INlYsw6Ninjjq',
-            'NAME': 'mydatabase',
-        }
-    }
-else:
-    # Running locally so connect to either a local MySQL instance or connect
-    # to Cloud SQL via the proxy.  To start the proxy via command line:
-    #    $ cloud_sql_proxy -instances=[INSTANCE_CONNECTION_NAME]=tcp:3306
-    # See https://cloud.google.com/sql/docs/mysql-connect-proxy
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.postgresql',
-            'HOST': '127.0.0.1',
-            'PORT': '3306',
-            'NAME': 'mydatabase',
-            'USER': 'djuser',
-            'PASSWORD': 'tu83DJ5hFLhMpHC40INlYsw6Ninjjq',
-        }
-    }
+# if os.getenv('GAE_APPLICATION', None):
+#     # Running on production App Engine, so connect to Google Cloud SQL using
+#     # the unix socket at /cloudsql/<your-cloudsql-connection string>
+#     DATABASES = {
+#         'default': {
+#             'ENGINE': 'django.db.backends.postgresql',
+#             'HOST': 'cloudsql/equest-292122:us-central1:myinstance',
+#             'USER': 'djuser',
+#             'PASSWORD': 'tu83DJ5hFLhMpHC40INlYsw6Ninjjq',
+#             'NAME': 'mydatabase',
+#         }
+#     }
+# else:
+#     # Running locally so connect to either a local MySQL instance or connect
+#     # to Cloud SQL via the proxy.  To start the proxy via command line:
+#     #    $ cloud_sql_proxy -instances=[INSTANCE_CONNECTION_NAME]=tcp:3306
+#     # See https://cloud.google.com/sql/docs/mysql-connect-proxy
+#     DATABASES = {
+#         'default': {
+#             'ENGINE': 'django.db.backends.postgresql',
+#             'HOST': '127.0.0.1',
+#             'PORT': '3306',
+#             'NAME': 'mydatabase',
+#             'USER': 'djuser',
+#             'PASSWORD': 'tu83DJ5hFLhMpHC40INlYsw6Ninjjq',
+#         }
+#     }
 # [END db_setup]
 
 AUTH_PASSWORD_VALIDATORS = [
