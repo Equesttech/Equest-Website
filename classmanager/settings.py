@@ -181,10 +181,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
-STATICFILES_DIRS = [STATIC_DIR, ]
-
-STATIC_URL = 'https://storage.googleapis.com/django-files-2020/static/'
+# STATICFILES_DIRS = [STATIC_DIR, ]
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+# STATIC_URL = 'https://storage.googleapis.com/django-files-2020/static/'
 
 MEDIA_ROOT = MEDIA_DIR
 MEDIA_URL = '/media/'
-#STATIC_ROOT = 'static/'
+
