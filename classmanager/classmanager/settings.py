@@ -89,7 +89,9 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'classmanager.classmanager.wsgi.application'
+WSGI_APPLICATION = 'classmanager.wsgi.application'
+
+AUTH_USER_MODEL = 'classroom.User'
 
 
 # Database
