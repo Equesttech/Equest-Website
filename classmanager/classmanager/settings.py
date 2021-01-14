@@ -35,6 +35,8 @@ DEBUG = os.getenv("DEBUG", "FALSE") == 'True'
 
 ALLOWED_HOSTS = os.getenv('DJANGO_ALLOWED_HOSTS', '127.0.0.1,localhost').split(",")
 
+AUTH_USER_MODEL = 'classroom.User'
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -91,7 +93,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'classmanager.wsgi.application'
 
-AUTH_USER_MODEL = 'classroom.User'
 
 
 # Database
