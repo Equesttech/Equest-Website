@@ -14,7 +14,7 @@ import os
 from django.core.management.utils import get_random_secret_key
 from pathlib import Path
 from urllib.parse import urlparse
-from classmanager import classroom
+# from classmanager.classroom import models
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -36,7 +36,7 @@ DEBUG = os.getenv("DEBUG", "FALSE") == 'True'
 
 ALLOWED_HOSTS = os.getenv('DJANGO_ALLOWED_HOSTS', '127.0.0.1,localhost').split(",")
 
-AUTH_USER_MODEL = 'classroom.User'
+# AUTH_USER_MODEL = 'classroom.User'
 
 # Application definition
 
