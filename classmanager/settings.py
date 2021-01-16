@@ -11,6 +11,9 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
 import os
+from django.core.management.utils import get_random_secret_key
+from pathlib import Path
+from urllib.parse import urlparse
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -24,14 +27,14 @@ MEDIA_DIR = os.path.join(BASE_DIR, 'media/')
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '13x8r2se41dawv$7!a-p_h4ni$^i^+r@le7wuadd6gmzb=$ss*'
+SECRET_KEY = os.getenv("DJANGO_SECRET_KEY", get_random_secret_key())
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.getenv("DEBUG", "FALSE") == 'True'
 
-ALLOWED_HOSTS = [
-    '*'
-]
+
+ALLOWED_HOSTS = os.getenv('DJANGO_ALLOWED_HOSTS', '127.0.0.1,localhost').split(",")
+
 
 AUTH_USER_MODEL = 'classroom.User'
 
@@ -97,98 +100,28 @@ WSGI_APPLICATION = 'classmanager.wsgi.application'
 
 
 # This is the Database before i Used Cloud SQL
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'classmanager/../db.sqlite3'),
+if os.getenv("DATABASE_URL", "") != "":
+    r = urlparse(os.environ.get("DATABASE_URL"))
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            'NAME': os.path.relpath(r.path, "/"),
+            'USER': r.username,
+            'HOST': r.hostname,
+            'PASSWORD': r.password,
+            'PORT': r.port,
+            'OPTIONS': {'sslmode': 'require'},
+        }
     }
-}
-# Database
-# https://docs.djangoproject.com/en/1.8/ref/settings/#databases
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
 
-# Check to see if MySQLdb is available; if not, have pymysql masquerade as
-# MySQLdb. This is a convenience feature for developers who cannot install
-# MySQLdb locally; when running in production on Google App Engine Standard
-# Environment, MySQLdb will be used.
-# try:
-#     import MySQLdb  # noqa: F401
-# except ImportError:
-#     import pymysql
-#     pymysql.install_as_MySQLdb()
+    }
+    }
 
-# # [START db_setup]
-# if os.getenv('SERVER_SOFTWARE', '').startswith('Google App Engine'):
-#     # Running on production App Engine, so connect to Google Cloud SQL using
-#     # the unix socket at /cloudsql/<your-cloudsql-connection string>
-#     DATABASES = {
-#         'default': {
-#             'ENGINE': 'django.db.backends.mysql',
-#             'HOST': '/cloudsql/equest-292122:us-central1:e-quest',
-#             'NAME': 'e-quest',
-#             'USER': 'equestadmin',
-#             'PASSWORD': 'bGlo1G12yO9zj5zz',
-#         }
-#     }
-# else:
-#     # Running locally so connect to either a local MySQL instance or connect to
-#     # Cloud SQL via the proxy. To start the proxy via command line:
-#     #
-#     #     $ cloud_sql_proxy -instances=[INSTANCE_CONNECTION_NAME]=tcp:3306
-#     #
-#     # See https://cloud.google.com/sql/docs/mysql-connect-proxy
-#     DATABASES = {
-#         'default': {
-#             'ENGINE': 'django.db.backends.mysql',
-#             'HOST': '127.0.0.1',
-#             'PORT': '3306',
-#             'NAME': 'e-quest.sql',
-#             'USER': 'equestadmin',
-#             'PASSWORD': 'bGlo1G12yO9zj5zz',
-#         }
-#     }
-# # [END db_setup]
-# #
-# # # Use a in-memory sqlite3 database when testing in CI systems
-# if os.getenv('TRAMPOLINE_CI', None):
-#     DATABASES = {
-#         'default': {
-#             'ENGINE': 'django.db.backends.sqlite3',
-#             'NAME': os.path.join(BASE_DIR, 'db.sqlite3')
-#         }
-#     }
-
-# [START db_setup]
-
-#
-# # Medium Blog Post For Handling The Database
-# if os.getenv('GAE_APPLICATION', None):
-#     # Running on production App Engine, so connect to Google Cloud SQL using
-#     # the unix socket at /cloudsql/<your-cloudsql-connection string>
-#     DATABASES = {
-#         'default': {
-#             'ENGINE': 'django.db.backends.mysql',
-#             'HOST': '/cloudsql/equest-292122:us-central1:e-quest',
-#             'USER': 'equestadmin',
-#             'PASSWORD': 'bGlo1G12yO9zj5zz',
-#             'NAME': 'e-quest',
-#         }
-#     }
-# else:
-#     # Running locally so connect to either a local MySQL instance or connect
-#     # to Cloud SQL via the proxy.  To start the proxy via command line:
-#     #    $ cloud_sql_proxy -instances=[INSTANCE_CONNECTION_NAME]=tcp:3306
-#     # See https://cloud.google.com/sql/docs/mysql-connect-proxy
-#     DATABASES = {
-#         'default': {
-#             'ENGINE': 'django.db.backends.mysql',
-#             'HOST': '127.0.0.1',
-#             'PORT': '3306',
-#             'NAME': 'e-quest',
-#             'USER': 'equestadmin',
-#             'PASSWORD': 'bGlo1G12yO9zj5zz',
-#         }
-#     }
-# # [END db_setup]
 
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
